@@ -2,8 +2,9 @@
 import json
 import operator
 import yaml
-
-exercise1 = open('exercise1_input','r',encoding='utf-8')
+import codecs
+yaml.allow_unicode = True
+exercise1 = open('exercise1_input','r')
 json_string = exercise1.read()
 
 datastore = json.loads(json_string)
@@ -18,9 +19,9 @@ buckets_counter = len(buckets_list)
 
 keystring = "{0} - {1}"
 result = {}
-
+"""adding oldest age to the bucket to ages"""
 for i in range(1,buckets_counter):
-    val = [""]
+    val = []
     dictkey = keystring.format(buckets_list[i-1],buckets_list[i])
     for name in ages_dict:
         if buckets_list[i-1] < ages_dict[name]<buckets_list[i]:
@@ -28,9 +29,6 @@ for i in range(1,buckets_counter):
     result[dictkey] = val
 
 with open('result', 'w') as yaml_file:
-    yaml.dump(result, yaml_file, default_flow_style=False,encoding='utf-8')
-
-
-
+    yaml.dump(result, yaml_file, default_flow_style=False,allow_unicode = True)
 
 
